@@ -66,8 +66,8 @@ app.use((err, req, res, next) => {
 const start = async () => {
   await testConnection();
   app.listen(PORT, () => {
-    console.log(`\n🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📚 Environment: ${process.env.NODE_ENV || "development"}`);
+    console.log(`\n Server running on http://localhost:${PORT}`);
+    console.log(` Environment: ${process.env.NODE_ENV || "development"}`);
     console.log(`\nAvailable endpoints:`);
     console.log(`  POST http://localhost:${PORT}/addSchool`);
     console.log(`  GET  http://localhost:${PORT}/listSchools?latitude=28.56&longitude=77.21\n`);

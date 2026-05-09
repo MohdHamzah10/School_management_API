@@ -9,7 +9,6 @@ const addSchool = async (req, res) => {
   try {
     const { name, address, latitude, longitude } = req.body;
 
-    // Check for duplicate school (same name + address)
     const [existing] = await pool.execute(
       "SELECT id FROM schools WHERE name = ? AND address = ?",
       [name.trim(), address.trim()]
@@ -23,13 +22,12 @@ const addSchool = async (req, res) => {
       });
     }
 
-    // Insert the new school
     const [result] = await pool.execute(
       "INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)",
       [name.trim(), address.trim(), parseFloat(latitude), parseFloat(longitude)]
     );
 
-    // Fetch the newly created record
+    
     const [newSchool] = await pool.execute(
       "SELECT id, name, address, latitude, longitude, created_at FROM schools WHERE id = ?",
       [result.insertId]

@@ -15,16 +15,16 @@ const setupDatabase = async () => {
     const dbName = process.env.DB_NAME || "school_management";
 
     
-    await connection.execute(
+    await connection.query(
       `CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
     );
     console.log(`Database '${dbName}' created or already exists`);
 
     
-    await connection.execute(`USE \`${dbName}\``);
+    await connection.query(`USE \`${dbName}\``);
 
     
-    await connection.execute(`
+    await connection.query(`
       CREATE TABLE IF NOT EXISTS schools (
         id          INT           NOT NULL AUTO_INCREMENT,
         name        VARCHAR(255)  NOT NULL,
@@ -40,11 +40,11 @@ const setupDatabase = async () => {
     console.log("Table 'schools' created or already exists");
 
     
-    const [existing] = await connection.execute(
+    const [existing] = await connection.query(
       "SELECT COUNT(*) AS count FROM schools"
     );
     if (existing[0].count === 0) {
-      await connection.execute(`
+      await connection.query(`
         INSERT INTO schools (name, address, latitude, longitude) VALUES
         ('Delhi Public School', 'Mathura Road, New Delhi, Delhi 110022', 28.5672, 77.2100),
         ('Ryan International School', 'Sector 31, Gurugram, Haryana 122001', 28.4595, 77.0266),
@@ -58,7 +58,7 @@ const setupDatabase = async () => {
       console.log("Sample school data inserted");
     }
 
-    console.log("\n🎉 Database setup complete! You can now start the server.");
+    console.log("\n Database setup complete! You can now start the server.");
   } catch (err) {
     console.error("Setup failed:", err.message);
     process.exit(1);
