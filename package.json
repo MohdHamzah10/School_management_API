@@ -4,7 +4,7 @@
   "description": "Node.js APIs for School Management with proximity-based sorting",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/config/setupDatabase.js && node src/server.js",
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "setup-db": "node src/config/setupDatabase.js"
   },
